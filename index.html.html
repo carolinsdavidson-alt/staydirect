@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stay Direct — Отели Шри-Ланки напрямую</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0D0D0B;
+  --sand:#F7F3EC;
+  --sand2:#EDE8DF;
+  --teal:#0A6E5C;
+  --teal2:#0E9478;
+  --teal-light:#E3F2EE;
+  --gold:#C4982A;
+  --gold-light:#FBF4E3;
+  --white:#FFFFFF;
+  --muted:#6B6760;
+  --border:rgba(13,13,11,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--sand);color:var(--ink);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ── NAVBAR ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 5%;height:70px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(247,243,236,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.logo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;letter-spacing:-0.5px}
+.logo span{color:var(--teal)}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{font-size:14px;font-weight:400;color:var(--muted);transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  padding:9px 22px;background:var(--teal);color:#fff;
+  border-radius:6px;font-size:13px;font-weight:500;
+  transition:all .2s;
+}
+.nav-cta:hover{background:var(--teal2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 5% 80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(10,110,92,0.08) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(196,152,42,0.06) 0%, transparent 70%);
+}
+.hero-pattern{
+  position:absolute;right:-100px;top:50%;transform:translateY(-50%);
+  width:600px;height:600px;opacity:0.04;
+  background-image:repeating-linear-gradient(45deg,var(--ink) 0,var(--ink) 1px,transparent 0,transparent 50%);
+  background-size:20px 20px;
+  border-radius:50%;
+}
+.hero-content{position:relative;max-width:700px}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 14px;border:1px solid var(--teal);border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--teal);margin-bottom:28px;
+  animation:fadeUp .8s ease both;
+}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(52px,7vw,88px);
+  line-height:1.0;letter-spacing:-2px;font-weight:300;
+  margin-bottom:24px;
+  animation:fadeUp .8s .1s ease both;
+}
+h1 em{font-style:italic;color:var(--teal)}
+h1 strong{font-weight:600}
+.hero-sub{
+  font-size:17px;color:var(--muted);line-height:1.7;
+  max-width:500px;margin-bottom:40px;
+  animation:fadeUp .8s .2s ease both;
+}
+.hero-actions{
+  display:flex;gap:14px;flex-wrap:wrap;
+  animation:fadeUp .8s .3s ease both;
+}
+.btn-primary{
+  padding:14px 32px;background:var(--teal);color:#fff;
+  border-radius:8px;font-size:15px;font-weight:500;
+  transition:all .25s;border:none;cursor:pointer;
+}
+.btn-primary:hover{background:var(--teal2);transform:translateY(-2px);box-shadow:0 8px 24px rgba(10,110,92,0.25)}
+.btn-outline{
+  padding:14px 32px;background:transparent;color:var(--ink);
+  border:1.5px solid var(--border);border-radius:8px;
+  font-size:15px;font-weight:400;transition:all .25s;cursor:pointer;
+}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal)}
+
+.hero-stats{
+  display:flex;gap:48px;margin-top:64px;padding-top:40px;
+  border-top:1px solid var(--border);
+  animation:fadeUp .8s .4s ease both;
+}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:40px;font-weight:600;color:var(--teal);line-height:1}
+.stat-label{font-size:12px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.06em}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION COMMONS ── */
+section{padding:100px 5%}
+.section-tag{font-size:11px;font-weight:600;color:var(--teal);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+.section-title em{font-style:italic;color:var(--teal)}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.7;max-width:520px}
+
+/* ── HOW IT WORKS ── */
+#how{background:var(--white)}
+.how-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:60px}
+.steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid var(--border);position:relative}
+.step:last-child{border-bottom:none}
+.step-num{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--teal-light);color:var(--teal);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;
+  flex-shrink:0;
+}
+.step-title{font-size:16px;font-weight:500;margin-bottom:6px}
+.step-desc{font-size:14px;color:var(--muted);line-height:1.6}
+.how-visual{
+  background:var(--sand);border-radius:16px;padding:32px;
+  border:1px solid var(--border);
+}
+.code-demo{
+  background:var(--ink);border-radius:10px;padding:20px;
+  font-family:'Courier New',monospace;font-size:12px;line-height:1.8;
+  color:#a8c5bd;overflow:hidden;
+}
+.code-demo .c-green{color:#5DCAA5}
+.code-demo .c-yellow{color:#FAC775}
+.code-demo .c-blue{color:#85B7EB}
+.code-demo .c-white{color:#F7F3EC}
+.code-demo .c-gray{color:#666}
+.widget-preview{margin-top:20px;background:#fff;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.wp-header{background:var(--teal);color:#fff;padding:10px 14px;font-size:13px;font-weight:500}
+.wp-row{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border);font-size:13px}
+.wp-row:last-child{border-bottom:none}
+.wp-price{font-weight:600;color:var(--teal)}
+
+/* ── HOTELS ── */
+#hotels{background:var(--sand)}
+.hotels-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:20px}
+.search-bar{
+  display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+  background:#fff;padding:12px 16px;border-radius:10px;
+  border:1px solid var(--border);
+}
+.search-bar select,.search-bar input{
+  border:none;outline:none;font-family:'Outfit',sans-serif;
+  font-size:13px;color:var(--ink);background:transparent;padding:4px 8px;
+}
+.search-bar-btn{
+  padding:8px 20px;background:var(--teal);color:#fff;
+  border:none;border-radius:6px;font-size:13px;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:background .2s;
+}
+.search-bar-btn:hover{background:var(--teal2)}
+.hotels-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px}
+.hotel-card{
+  background:#fff;border-radius:14px;overflow:hidden;
+  border:1px solid var(--border);transition:all .25s;cursor:pointer;
+}
+.hotel-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,13,11,0.1);border-color:var(--teal)}
+.hotel-img{
+  height:200px;display:flex;align-items:center;justify-content:center;
+  font-size:64px;position:relative;
+  background:linear-gradient(135deg,var(--teal-light),var(--sand2));
+}
+.hotel-badge{
+  position:absolute;top:14px;right:14px;
+  background:rgba(247,243,236,0.92);backdrop-filter:blur(8px);
+  border:1px solid var(--border);border-radius:20px;
+  padding:4px 10px;font-size:11px;font-weight:600;color:var(--teal);
+}
+.hotel-body{padding:18px}
+.hotel-name{font-size:16px;font-weight:500;margin-bottom:4px}
+.hotel-loc{font-size:12px;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:4px}
+.hotel-rooms{border-top:1px solid var(--border);padding-top:12px;display:flex;flex-direction:column;gap:6px}
+.room-row{display:flex;justify-content:space-between;align-items:center}
+.room-name{font-size:12px;color:var(--muted)}
+.room-price{font-size:14px;font-weight:600;color:var(--teal)}
+.room-price span{font-size:11px;font-weight:400;color:var(--muted)}
+.hotel-footer{margin-top:14px;display:flex;gap:8px}
+.btn-sm{flex:1;padding:9px;border-radius:7px;font-size:13px;font-weight:500;border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.btn-sm-primary{background:var(--teal);color:#fff}
+.btn-sm-primary:hover{background:var(--teal2)}
+.btn-sm-outline{background:transparent;border:1px solid var(--border);color:var(--ink)}
+.btn-sm-outline:hover{border-color:var(--teal);color:var(--teal)}
+
+/* ── FOR OPERATORS ── */
+#operators{background:var(--ink);color:#fff}
+#operators .section-tag{color:var(--gold)}
+#operators .section-title{color:#fff}
+#operators .section-title em{color:var(--gold)}
+#operators .section-sub{color:rgba(255,255,255,0.6)}
+.ops-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;margin-top:60px}
+.op-card{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:28px;transition:all .2s;
+}
+.op-card:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2)}
+.op-icon{
+  width:48px;height:48px;border-radius:10px;
+  background:rgba(10,110,92,0.2);display:flex;align-items:center;
+  justify-content:center;font-size:22px;margin-bottom:16px;
+}
+.op-title{font-size:16px;font-weight:500;margin-bottom:8px;color:#fff}
+.op-desc{font-size:14px;color:rgba(255,255,255,0.55);line-height:1.6}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:60px}
+.plan{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);
+  border-radius:14px;padding:28px;position:relative;
+}
+.plan.featured{background:var(--teal);border-color:var(--teal)}
+.plan-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--gold);color:var(--ink);
+  font-size:10px;font-weight:600;padding:3px 12px;border-radius:20px;
+  text-transform:uppercase;letter-spacing:.06em;
+}
+.plan-name{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,0.6);margin-bottom:8px}
+.plan.featured .plan-name{color:rgba(255,255,255,0.8)}
+.plan-price{font-family:'Cormorant Garamond',serif;font-size:44px;font-weight:600;color:#fff;line-height:1}
+.plan-period{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:20px}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.plan-features li{font-size:13px;color:rgba(255,255,255,0.7);display:flex;gap:8px;align-items:flex-start}
+.plan-features li::before{content:'✓';color:var(--gold);font-weight:700;flex-shrink:0}
+.plan.featured .plan-features li{color:rgba(255,255,255,0.9)}
+.plan-btn{
+  width:100%;padding:11px;border-radius:8px;font-size:14px;font-weight:500;
+  border:none;cursor:pointer;font-family:'Outfit',sans-serif;transition:all .2s;
+}
+.plan-btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.2);color:#fff}
+.plan-btn-outline:hover{border-color:rgba(255,255,255,0.5)}
+.plan-btn-primary{background:#fff;color:var(--teal)}
+.plan-btn-primary:hover{background:var(--sand)}
+
+/* ── API SECTION ── */
+.api-section{margin-top:80px;border-top:1px solid rgba(255,255,255,0.1);padding-top:80px}
+.api-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.endpoint{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 16px;border:1px solid rgba(255,255,255,0.1);
+  border-radius:8px;margin-bottom:8px;
+}
+.method{
+  font-family:'Courier New',monospace;font-size:10px;font-weight:600;
+  padding:3px 8px;border-radius:4px;min-width:40px;text-align:center;
+}
+.get{background:rgba(93,202,165,0.2);color:#5DCAA5}
+.post{background:rgba(250,199,117,0.2);color:#FAC775}
+.ep-path{font-family:'Courier New',monospace;font-size:12px;color:rgba(255,255,255,0.8)}
+.ep-desc{font-size:12px;color:rgba(255,255,255,0.4);margin-left:auto}
+.code-block{
+  background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:20px;
+  font-family:'Courier New',monospace;font-size:12px;line-height:1.8;
+  color:#a8c5bd;
+}
+.code-block .g{color:#5DCAA5}
+.code-block .y{color:#FAC775}
+.code-block .b{color:#85B7EB}
+.code-block .w{color:#F7F3EC}
+
+/* ── CONTACT ── */
+#contact{background:var(--sand2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px}
+.contact-form{background:#fff;border-radius:14px;padding:36px;border:1px solid var(--border)}
+.form-group{margin-bottom:18px}
+.form-group label{display:block;font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;padding:11px 14px;border:1px solid var(--border);
+  border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;
+  color:var(--ink);background:var(--sand);transition:border-color .2s;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:var(--teal);background:#fff;
+}
+.form-group textarea{height:100px;resize:vertical}
+.form-submit{
+  width:100%;padding:13px;background:var(--teal);color:#fff;
+  border:none;border-radius:8px;font-size:15px;font-weight:500;
+  font-family:'Outfit',sans-serif;cursor:pointer;transition:all .2s;
+}
+.form-submit:hover{background:var(--teal2)}
+.contact-info{display:flex;flex-direction:column;gap:28px}
+.ci-item{display:flex;gap:16px;align-items:flex-start}
+.ci-icon{
+  width:44px;height:44px;border-radius:10px;background:var(--teal-light);
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;
+}
+.ci-title{font-size:15px;font-weight:500;margin-bottom:4px}
+.ci-desc{font-size:13px;color:var(--muted);line-height:1.5}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--ink);color:rgba(255,255,255,0.5);
+  padding:48px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;
+}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:#fff}
+.footer-logo span{color:var(--teal)}
+.footer-links{display:flex;gap:28px}
+.footer-links a{font-size:13px;color:rgba(255,255,255,0.4);transition:color .2s}
+.footer-links a:hover{color:#fff}
+.footer-copy{font-size:12px}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;
+  background:var(--teal);color:#fff;
+  padding:14px 22px;border-radius:10px;font-size:14px;
+  transform:translateY(80px);opacity:0;transition:all .3s;
+  pointer-events:none;z-index:999;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .how-grid,.contact-grid,.api-grid{grid-template-columns:1fr}
+  .ops-grid,.plans-grid{grid-template-columns:1fr}
+  .hero-stats{gap:28px;flex-wrap:wrap}
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Stay<span>Direct</span></div>
+  <div class="nav-links">
+    <a href="#how">Как работает</a>
+    <a href="#hotels">Отели</a>
+    <a href="#operators">Туроператорам</a>
+    <a href="#contact">Контакты</a>
+  </div>
+  <a href="#contact" class="nav-cta">Подключиться</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="hero-content">
+    <div class="hero-tag">🌴 Прямая дистрибуция отелей Шри-Ланки</div>
+    <h1>Отели<br><em>напрямую</em>,<br><strong>без наценок</strong></h1>
+    <p class="hero-sub">Платформа для туроператоров — подключайте живые цены отелей Шри-Ланки через API или виджет. Цены обновляются автоматически.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Получить API-ключ</button>
+      <button class="btn-outline" onclick="document.getElementById('hotels').scrollIntoView({behavior:'smooth'})">Смотреть отели →</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num" id="stat-h">4</div>
+        <div class="stat-label">Отелей в базе</div>
+      </div>
+      <div>
+        <div class="stat-num">34</div>
+        <div class="stat-label">Города Шри-Ланки</div>
+      </div>
+      <div>
+        <div class="stat-num">0%</div>
+        <div class="stat-label">Комиссия сейчас</div>
+      </div>
+      <div>
+        <div class="stat-num">API</div>
+        <div class="stat-label">Живые цены</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="section-tag">Как это работает</div>
+  <h2 class="section-title">Подключение<br><em>за 5 минут</em></h2>
+  <div class="how-grid">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Получи API-ключ</div>
+          <div class="step-desc">Регистрируйся, получай ключ и документацию. Бесплатный план — 1000 запросов в день.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Вставь виджет или подключи API</div>
+          <div class="step-desc">Две строки кода на твоём сайте — и блок с актуальными ценами отелей готов.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <div class="step-title">Цены обновляются автоматически</div>
+          <div class="step-desc">Отели меняют цены — твой сайт отражает это мгновенно. Ничего делать не нужно.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <div class="step-title">Принимай бронирования</div>
+          <div class="step-desc">Гости бронируют через твой сайт, ты получаешь заявку. Прямой контакт без посредников.</div>
+        </div>
+      </div>
+    </div>
+    <div class="how-visual">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:12px;font-weight:500">Код для вставки на сайт:</div>
+      <div class="code-demo">
+<span class="c-gray">&lt;!-- StayDirect Widget --&gt;</span>
+<span class="c-white">&lt;div</span> <span class="c-blue">id</span>=<span class="c-yellow">"staydirect-widget"</span><span class="c-white">&gt;&lt;/div&gt;</span>
+<span class="c-white">&lt;script</span> <span class="c-blue">src</span>=<span class="c-yellow">"https://staydirect.pro/widget.js</span>
+  <span class="c-yellow">?key=sk_live_YOUR_KEY</span>
+  <span class="c-yellow">&dest=Ahangama</span>
+  <span class="c-yellow">&color=0A6E5C"</span><span class="c-white">&gt;&lt;/script&gt;</span>
+      </div>
+      <div style="font-size:12px;color:var(--muted);margin:16px 0 8px;font-weight:500">Результат на сайте оператора:</div>
+      <div class="widget-preview">
+        <div class="wp-header">🏨 Отели Шри-Ланки — прямые цены</div>
+        <div class="wp-row">
+          <div>
+            <div style="font-weight:500;font-size:13px">🏖 Liya Beach Kathaluwa</div>
+            <div style="font-size:11px;color:var(--muted)">Double Sea View</div>
+          </div>
+          <div style="text-align:right">
+            <div class="wp-price">$39<span style="font-size:11px;font-weight:400;color:var(--muted)">/ночь</span></div>
+            <div style="font-size:11px;margin-top:3px;background:var(--teal);color:#fff;padding:2px 8px;border-radius:4px;cursor:pointer">Забронировать</div>
+          </div>
+        </div>
+        <div class="wp-row">
+          <div>
+            <div style="font-weight:500;font-size:13px">🏰 The Fortress Resort</div>
+            <div style="font-size:11px;color:var(--muted)">Superior Room</div>
+          </div>
+          <div style="text-align:right">
+            <div class="wp-price">$120<span style="font-size:11px;font-weight:400;color:var(--muted)">/ночь</span></div>
+            <div style="font-size:11px;margin-top:3px;background:var(--teal);color:#fff;padding:2px 8px;border-radius:4px;cursor:pointer">Забронировать</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOTELS -->
+<section id="hotels">
+  <div class="hotels-header">
+    <div>
+      <div class="section-tag">База отелей</div>
+      <h2 class="section-title">Отели <em>Шри-Ланки</em></h2>
+    </div>
+    <div class="search-bar">
+      <select id="dest-filter" onchange="filterHotels()">
+        <option value="">Все локации</option>
+        <option value="Ahangama">Ахангама</option>
+        <option value="Galle">Галле</option>
+        <option value="Mirissa">Мирисса</option>
+        <option value="Ella">Элла</option>
+      </select>
+      <input type="text" id="search-input" placeholder="🔍 Поиск отеля..." onkeyup="filterHotels()" style="min-width:160px">
+      <input type="date" id="checkin" value="2026-05-16">
+      <input type="date" id="checkout" value="2026-05-23">
+      <button class="search-bar-btn" onclick="filterHotels()">Найти</button>
+    </div>
+  </div>
+  <div class="hotels-grid" id="hotels-grid"></div>
+</section>
+
+<!-- FOR OPERATORS -->
+<section id="operators">
+  <div class="section-tag">Для туроператоров</div>
+  <h2 class="section-title">Замени <em>Само-тур</em><br>на прямой канал</h2>
+  <p class="section-sub">Те же цены. Без абонентки. Без посредников. Виджет вставляется на любой сайт за 5 минут.</p>
+
+  <div class="ops-grid">
+    <div class="op-card">
+      <div class="op-icon">🔌</div>
+      <div class="op-title">REST API</div>
+      <div class="op-desc">JSON или XML. Один запрос возвращает все отели с актуальными ценами, доступностью и описаниями.</div>
+    </div>
+    <div class="op-card">
+      <div class="op-icon">📦</div>
+      <div class="op-title">Виджет / iframe</div>
+      <div class="op-desc">Две строки кода — и на твоём сайте появляется блок бронирования с живыми ценами. Настраиваемый цвет.</div>
+    </div>
+    <div class="op-card">
+      <div class="op-icon">🔔</div>
+      <div class="op-title">Webhook уведомления</div>
+      <div class="op-desc">Цена изменилась — мы сразу отправляем POST на твой сервер. Твои данные всегда актуальны.</div>
+    </div>
+  </div>
+
+  <div class="plans-grid" style="margin-top:60px">
+    <div class="plan">
+      <div class="plan-name">Старт</div>
+      <div class="plan-price">$0</div>
+      <div class="plan-period">навсегда бесплатно</div>
+      <ul class="plan-features">
+        <li>До 50 отелей</li>
+        <li>1 000 запросов/день</li>
+        <li>Виджет с брендингом</li>
+        <li>JSON API</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Начать бесплатно</button>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">Популярный</div>
+      <div class="plan-name">Бизнес</div>
+      <div class="plan-price">$49<span style="font-size:18px">/мес</span></div>
+      <div class="plan-period">или $490/год</div>
+      <ul class="plan-features">
+        <li>Все отели без лимита</li>
+        <li>50 000 запросов/день</li>
+        <li>Виджет без брендинга</li>
+        <li>JSON + XML API</li>
+        <li>Webhook уведомления</li>
+        <li>Приоритетная поддержка</li>
+      </ul>
+      <button class="plan-btn plan-btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Подключить</button>
+    </div>
+    <div class="plan">
+      <div class="plan-name">Корпоративный</div>
+      <div class="plan-price" style="font-size:32px">По запросу</div>
+      <div class="plan-period">индивидуально</div>
+      <ul class="plan-features">
+        <li>White-label решение</li>
+        <li>Безлимит запросов</li>
+        <li>SLA 99.9%</li>
+        <li>Выделенный менеджер</li>
+        <li>Кастомная интеграция</li>
+      </ul>
+      <button class="plan-btn plan-btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Обсудить</button>
+    </div>
+  </div>
+
+  <div class="api-section">
+    <div style="margin-bottom:40px">
+      <div class="section-tag" style="color:var(--gold)">API документация</div>
+      <h3 style="font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;color:#fff;margin-bottom:8px">Простой <em style="color:var(--gold)">REST API</em></h3>
+    </div>
+    <div class="api-grid">
+      <div>
+        <div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/search</span><span class="ep-desc">Поиск отелей</span></div>
+        <div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/hotels</span><span class="ep-desc">Список отелей</span></div>
+        <div class="endpoint"><span class="method get">GET</span><span class="ep-path">/api/v1/hotels/:id/rooms</span><span class="ep-desc">Номера + цены</span></div>
+        <div class="endpoint"><span class="method post">POST</span><span class="ep-path">/api/v1/bookings</span><span class="ep-desc">Бронирование</span></div>
+        <div class="endpoint"><span class="method get">GET</span><span class="ep-path">/widget.js</span><span class="ep-desc">JS виджет</span></div>
+      </div>
+      <div class="code-block">
+<span class="g">GET</span> <span class="b">/api/v1/search</span>
+  ?checkin=<span class="y">2026-05-16</span>
+  &checkout=<span class="y">2026-05-23</span>
+  &destination=<span class="y">Ahangama</span>
+  &guests=<span class="y">2</span>
+  &key=<span class="y">sk_live_your_key</span>
+
+<span class="g">Response:</span>
+{
+  <span class="b">"results"</span>: [{
+    <span class="b">"name"</span>: <span class="y">"Liya Beach Kathaluwa"</span>,
+    <span class="b">"rating"</span>: <span class="y">8.7</span>,
+    <span class="b">"rooms"</span>: [{
+      <span class="b">"type"</span>: <span class="y">"Double Sea View"</span>,
+      <span class="b">"price_usd"</span>: <span class="y">39</span>,
+      <span class="b">"total_usd"</span>: <span class="y">273</span>
+    }]
+  }],
+  <span class="b">"meta"</span>: { <span class="b">"nights"</span>: <span class="y">7</span> }
+}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Подключение</div>
+  <h2 class="section-title">Получи <em>API-ключ</em><br>бесплатно</h2>
+  <p class="section-sub">Заполни форму — мы пришлём ключ и инструкцию на email в течение 24 часов.</p>
+  <div class="contact-grid">
+    <div class="contact-form">
+      <div class="form-group">
+        <label>Название компании</label>
+        <input type="text" id="f-company" placeholder="ООО Туры в рай">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="f-email" placeholder="manager@company.com">
+      </div>
+      <div class="form-group">
+        <label>Телефон / WhatsApp</label>
+        <input type="tel" id="f-phone" placeholder="+7 999 123 45 67">
+      </div>
+      <div class="form-group">
+        <label>Тарифный план</label>
+        <select id="f-plan">
+          <option>Старт (бесплатно)</option>
+          <option>Бизнес ($49/мес)</option>
+          <option>Корпоративный</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Сайт / комментарий</label>
+        <textarea id="f-comment" placeholder="Ваш сайт и что планируете интегрировать..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitForm()">Получить API-ключ →</button>
+    </div>
+    <div class="contact-info">
+      <div class="ci-item">
+        <div class="ci-icon">🌍</div>
+        <div>
+          <div class="ci-title">Международная платформа</div>
+          <div class="ci-desc">Работаем с туроператорами из России, СНГ, Европы и Азии. API на русском и английском.</div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">⚡</div>
+        <div>
+          <div class="ci-title">Быстрый старт</div>
+          <div class="ci-desc">Ключ выдаём в течение 24 часов. Интеграция занимает от 5 минут (виджет) до нескольких часов (API).</div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">💬</div>
+        <div>
+          <div class="ci-title">Поддержка в Telegram</div>
+          <div class="ci-desc">Техническая поддержка и помощь с интеграцией. Отвечаем быстро.</div>
+        </div>
+      </div>
+      <div class="ci-item">
+        <div class="ci-icon">🏖</div>
+        <div>
+          <div class="ci-title">Знаем рынок изнутри</div>
+          <div class="ci-desc">Платформа создана специалистом по туризму Шри-Ланки. Понимаем потребности туроператоров.</div>
+        </div>
+      </div>
+      <div style="background:var(--teal-light);border-radius:12px;padding:20px;border:1px solid rgba(10,110,92,0.15)">
+        <div style="font-size:13px;font-weight:500;color:var(--teal);margin-bottom:6px">Demo API ключ для тестирования:</div>
+        <div style="font-family:'Courier New',monospace;font-size:12px;background:#fff;padding:8px 12px;border-radius:6px;color:var(--ink);border:1px solid var(--border)">sk_live_demo_key_readonly_001</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">Попробуй: staydirect.pro/api/v1/search?key=sk_live_demo_key_readonly_001&checkin=2026-05-16&checkout=2026-05-23</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Stay<span>Direct</span></div>
+  <div class="footer-links">
+    <a href="#how">Как работает</a>
+    <a href="#hotels">Отели</a>
+    <a href="#operators">Операторам</a>
+    <a href="https://staydirect-production.up.railway.app/api/v1" target="_blank">API Docs</a>
+  </div>
+  <div class="footer-copy">© 2026 StayDirect. Шри-Ланка.</div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// Load hotels from admin localStorage or use defaults
+function getHotels() {
+  try {
+    const saved = localStorage.getItem('staydirect_db_v5');
+    if (saved) {
+      const db = JSON.parse(saved);
+      if (db.hotels && db.hotels.length > 0) {
+        // Merge rooms into hotels for display
+        return db.hotels.filter(h=>h.status==='active').map(h => ({
+          ...h,
+          rooms: (db.rooms||[]).filter(r=>r.hotelId===h.id && r.status==='active').map(r=>({type:r.type,price:r.price}))
+        }));
+      }
+    }
+  } catch(e) {}
+  return [
+    {id:1,name:'Liya Beach Kathaluwa',loc:'Ahangama',rating:8.7,emoji:'🏖',rooms:[{type:'Double Sea View',price:39},{type:'Pool View',price:44},{type:'Standard',price:29}]},
+    {id:2,name:'The Fortress Resort & Spa',loc:'Galle',rating:9.1,emoji:'🏰',rooms:[{type:'Luxury Suite',price:180},{type:'Superior Room',price:120}]},
+    {id:3,name:'Mirissa Hills',loc:'Mirissa',rating:8.4,emoji:'🌊',rooms:[{type:'Surf Bungalow',price:55},{type:'Pool Villa',price:95}]},
+    {id:4,name:'Ella Rock Retreat',loc:'Ella',rating:8.9,emoji:'🏔',rooms:[{type:'Mountain View',price:65}]},
+  ];
+}
+
+let hotels = getHotels();
+
+// Build location list dynamically
+function buildLocationFilter() {
+  const locs = [...new Set(hotels.map(h=>h.loc))].sort();
+  const sel = document.getElementById('dest-filter');
+  sel.innerHTML = '<option value="">Все локации</option>' + 
+    locs.map(l=>`<option value="${l}">${l}</option>`).join('');
+}
+
+function filterHotels(){
+  hotels = getHotels();
+  const dest = document.getElementById('dest-filter').value;
+  const search = document.getElementById('search-input') ? document.getElementById('search-input').value.toLowerCase() : '';
+  const checkin = document.getElementById('checkin').value;
+  const checkout = document.getElementById('checkout').value;
+  const nights = checkin&&checkout ? Math.max(1,Math.round((new Date(checkout)-new Date(checkin))/86400000)) : 7;
+  let filtered = dest ? hotels.filter(h=>h.loc===dest) : hotels;
+  if (search) filtered = filtered.filter(h=>h.name.toLowerCase().includes(search)||h.loc.toLowerCase().includes(search));
+  renderHotels(filtered, nights);
+  document.getElementById('stat-h').textContent = filtered.length;
+}
+
+function renderHotels(list, nights=7){
+  const grid = document.getElementById('hotels-grid');
+  grid.innerHTML = list.map(h=>`
+    <div class="hotel-card">
+      <div class="hotel-img">
+        <span>${h.emoji}</span>
+        <div class="hotel-badge">★ ${h.rating}</div>
+      </div>
+      <div class="hotel-body">
+        <div class="hotel-name">${h.name}</div>
+        <div class="hotel-loc">📍 ${h.loc}, Шри-Ланка</div>
+        <div class="hotel-rooms">
+          ${h.rooms.slice(0,3).map(r=>`
+            <div class="room-row">
+              <span class="room-name">${r.type}</span>
+              <span class="room-price">$${r.price}<span>/ночь</span></span>
+            </div>
+          `).join('')}
+          <div style="font-size:11px;color:var(--muted);margin-top:4px">${nights} ночей · от $${Math.min(...h.rooms.map(r=>r.price))*nights}</div>
+        </div>
+        <div class="hotel-footer">
+          <button class="btn-sm btn-sm-outline">Подробнее</button>
+          <button class="btn-sm btn-sm-primary" onclick="showToast('Запрос отправлен! Менеджер свяжется с вами.')">Забронировать</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('stat-h').textContent = list.length;
+}
+
+function submitForm(){
+  const company = document.getElementById('f-company').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+  if(!company || !email){ showToast('Заполните название и email'); return; }
+  showToast('Заявка отправлена! Ключ придёт на ' + email + ' в течение 24 часов.', true);
+  ['f-company','f-email','f-phone','f-comment'].forEach(id=>document.getElementById(id).value='');
+}
+
+let toastTimer;
+function showToast(msg, success=false){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = success ? 'var(--teal)' : 'var(--ink)';
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 4000);
+}
+
+// Init
+hotels = getHotels();
+buildLocationFilter();
+renderHotels(hotels);
+document.getElementById('stat-h').textContent = hotels.length;
+
+// Animate stats on scroll
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting) e.target.style.opacity='1';
+  });
+},{threshold:0.1});
+document.querySelectorAll('.hotel-card,.op-card,.plan,.step').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transition='opacity .5s ease, transform .5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
